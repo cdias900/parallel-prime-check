@@ -8,7 +8,8 @@
 
 bool is_prime_optimized(unsigned long long n) {
   unsigned long long i;
-  for (i = 2; i * i <= n; i++) {
+  if (n % 2 == 0) return n == 2;
+  for (i = 3; i * i <= n; i+=2) {
     if (n % i == 0) return false;
   }
   return n > 1;

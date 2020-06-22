@@ -9,7 +9,8 @@
 
 bool is_prime_optimized(unsigned long long n) {
   unsigned long long i;
-  for (i = 2; i * i <= n; i++) {
+  if (n % 2 == 0) return n == 2;
+  for (i = 3; i * i <= n; i+=2) {
     if (n % i == 0) return false;
   }
   return n > 1;
@@ -50,6 +51,7 @@ int main(int argc, char * argv[]) {
     }
     t2 = omp_get_wtime();
     printf("Done in %lf s\n", t2-t1);
+    fflush(stdout);
   } else {
     for(i = 0; i < N; i++) {
       MPI_Recv(&aux, 1, MPI_UNSIGNED_LONG_LONG, 0, 0, MPI_COMM_WORLD, &st);
